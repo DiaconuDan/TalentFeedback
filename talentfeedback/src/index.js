@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import Firebase, { FirebaseContext } from "./components/Firebase/index";
 import "./index.css";
-import App from "./App/App";
+import App from "../src/App/App";
 
 render(
   <FirebaseContext.Provider value={new Firebase()}>

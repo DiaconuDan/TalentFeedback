@@ -8,7 +8,7 @@ import { AuthUserContext } from "../Session/index";
 const Navigation = () => (
   <div>
     <AuthUserContext.Consumer>
-      {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+      {authUser => authUser && <NavigationAuth />}
     </AuthUserContext.Consumer>
   </div>
 );
@@ -16,18 +16,9 @@ const Navigation = () => (
 const NavigationAuth = () => (
   <ul>
     <li>
-      <Link to={ROUTES.STATISTICS}>Statistics</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
-  </ul>
-);
-
-const NavigationNonAuth = () => (
-  <ul>
-    <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <Link to={ROUTES.SIGN_IN}>
+        <SignOutButton />
+      </Link>
     </li>
   </ul>
 );
