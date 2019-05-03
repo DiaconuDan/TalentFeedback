@@ -1,25 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../SignOut/SignOut";
-
+import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../Session/index";
 
+const Wrapper = styled.div`
+background-color: #6441A5'
+`;
+
 const Navigation = () => (
-  <div>
+  <Wrapper>
     <AuthUserContext.Consumer>
       {authUser => authUser && <NavigationAuth />}
     </AuthUserContext.Consumer>
-  </div>
+  </Wrapper>
 );
 
 const NavigationAuth = () => (
   <ul>
-    <li>
-      <Link to={ROUTES.SIGN_IN}>
-        <SignOutButton />
-      </Link>
-    </li>
+    <Link to={ROUTES.SIGN_IN}>
+      <SignOutButton />
+    </Link>
   </ul>
 );
 

@@ -4,6 +4,11 @@ import { compose } from "recompose";
 import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  background-color: #6441a5;
+`;
 
 const SignIn = () => (
   <div>

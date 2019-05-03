@@ -10,13 +10,6 @@ class Component extends React.Component {
   constructor(props) {
     super(props);
     const query = this.props.firebase.feedbacks();
-    query.get().then(doc => {
-      const data = doc.docs.map(doc => doc.data());
-      debugger;
-      this.setState({
-        data
-      });
-    });
   }
 
   render() {
@@ -26,9 +19,6 @@ class Component extends React.Component {
       <div>
         <h1> Feedbacks..</h1>
         <h2> Test..</h2>
-        {data.map(d => (
-          <div>{JSON.stringify(d)}</div>
-        ))}
       </div>
     );
   }

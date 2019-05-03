@@ -1,17 +1,33 @@
 import React from "react";
-import { withAuthorization, AuthUserContext } from "../Session";
+import { compose } from "recompose";
+import { withFirebase } from "../Firebase";
+import { withAuthorization } from "../Session";
+import CustomizedTable from "./CustomizedTable";
+import styled from "styled-components";
 
-export const Statistics = () => (
-  <AuthUserContext.Consumer>
-    {authUser => (
-      <div>
-        <h1>Account: {authUser.email}</h1>
-        <h1>Statistics..</h1>
-      </div>
-    )}
-  </AuthUserContext.Consumer>
-);
+const Wrapper = styled.div``;
+const Header = styled.h1`
+  text-align: center;
+`;
+class Component extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
+    return (
+      <Wrapper>
+        {/* <Header>Statistics..</Header> */}
+        <CustomizedTable />
+      </Wrapper>
+    );
+  }
+}
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(Statistics);
+const Statistics = compose(
+  withFirebase,
+  withAuthorization(condition)
+)(Component);
+
+export default Statistics;
