@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const RightAlign = styled.button`
   float: right;
-  margin-top: -35px;
+  margin-top: -45px;
   margin-right: 10px;
 `;
 

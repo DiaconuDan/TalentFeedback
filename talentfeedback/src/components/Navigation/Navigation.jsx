@@ -5,16 +5,12 @@ import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../Session/index";
 
-const Wrapper = styled.div`
-background-color: #6441A5'
-`;
-
 const Navigation = () => (
-  <Wrapper>
+  <div style={{ backgroundColor: "#6441A5" }}>
     <AuthUserContext.Consumer>
       {authUser => authUser && <NavigationAuth />}
     </AuthUserContext.Consumer>
-  </Wrapper>
+  </div>
 );
 
 const NavigationAuth = () => (

@@ -13,7 +13,7 @@ import styled from "styled-components";
 
 const Header = styled.h1`
   text-align: center;
-  margin-top: 50px;
+  margin-top: 60px;
 `;
 
 const CustomTableCell = withStyles(theme => ({
@@ -74,7 +74,6 @@ class Component extends React.Component {
     return (
       <div>
         <Header>
-          {" "}
           Average score of {score} from {feedbacksNumber} feedbacks
         </Header>
         <Paper className={classes.root}>
