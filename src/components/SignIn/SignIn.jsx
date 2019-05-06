@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
-import styled from "styled-components";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -140,9 +140,9 @@ class SignInFormBase extends Component {
   }
 }
 
-const SignInForm = compose(
+export const SignInForm = compose(
   withRouter,
   withFirebase
 )(SignInFormBase);
 
-export { SignIn, SignInForm };
+export default SignIn;

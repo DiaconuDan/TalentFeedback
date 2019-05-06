@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "react-loader-spinner";
 import { withFirebase } from "../Firebase";
 import styled from "styled-components";
 import angry from "./angry.svg";
@@ -51,20 +50,14 @@ const Button = styled.button`
   margin-left: 200px;
   margin-top: 40px;
 `;
-const INITIAL_STATE = {
-  score: "",
-  comment: ""
-};
+
 class Component extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...INITIAL_STATE };
-    const query = this.props.firebase.feedbacks();
-  }
+  state = {
+    score: "",
+    comment: ""
+  };
 
   onSubmit = event => {
-    const { comment, score } = this.state;
-
     alert("Not implemented yet");
 
     event.preventDefault();
@@ -75,40 +68,38 @@ class Component extends React.Component {
   };
 
   render() {
-    const { comment, score } = this.state;
+    const { comment } = this.state;
 
     return (
-      <div>
-        <Box>
-          <form onSubmit={this.onSubmit}>
-            <InterviewQuestion>
-              {" "}
-              How happy are you with the interview ?
-            </InterviewQuestion>
-            <Emoticon src={angry} />
-            <Emoticon src={sad} />
-            <Emoticon src={neutral} />
-            <Emoticon src={happy} />
-            <Emoticon src={amazing} />
+      <Box>
+        <form onSubmit={this.onSubmit}>
+          <InterviewQuestion>
+            {" "}
+            How happy are you with the interview ?
+          </InterviewQuestion>
+          <Emoticon src={angry} />
+          <Emoticon src={sad} />
+          <Emoticon src={neutral} />
+          <Emoticon src={happy} />
+          <Emoticon src={amazing} />
 
-            <InterviewQuestion>
-              {" "}
-              Would you like to tell us something ?
-            </InterviewQuestion>
-            <FeedbackComment
-              type="text"
-              value={comment}
-              onChange={this.onChange}
-            />
+          <InterviewQuestion>
+            {" "}
+            Would you like to tell us something ?
+          </InterviewQuestion>
+          <FeedbackComment
+            type="text"
+            value={comment}
+            onChange={this.onChange}
+          />
 
-            <Button type="submit">Submit</Button>
-          </form>
-        </Box>
-      </div>
+          <Button type="submit">Submit</Button>
+        </form>
+      </Box>
     );
   }
 }
 
 const Feedback = withFirebase(Component);
 
-export { Feedback };
+export default Feedback;

@@ -1,24 +1,21 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
-import SignOutButton from "../SignOut/SignOut";
-import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
-import { AuthUserContext } from "../Session/index";
-
-const Navigation = () => (
-  <div style={{ backgroundColor: "#6441A5" }}>
-    <AuthUserContext.Consumer>
-      {authUser => authUser && <NavigationAuth />}
-    </AuthUserContext.Consumer>
-  </div>
-);
+import AuthUserContext from "../Session/context";
+const SignOutButton = lazy(() => import("../SignOut/SignOut"));
 
 const NavigationAuth = () => (
-  <ul>
+  <Suspense fallback={<div>Loading...</div>}>
     <Link to={ROUTES.SIGN_IN}>
-      <SignOutButton />
+      <SignOutButton style={{ backgroundColor: "#6441A5" }} />
     </Link>
-  </ul>
+  </Suspense>
+);
+
+const Navigation = () => (
+  <AuthUserContext.Consumer>
+    {authUser => authUser && <NavigationAuth />}
+  </AuthUserContext.Consumer>
 );
 
 export default Navigation;
