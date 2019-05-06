@@ -10,11 +10,14 @@ import Paper from "@material-ui/core/Paper";
 import { withFirebase } from "../Firebase";
 import { compose } from "recompose";
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
 
 const Header = styled.h1`
   text-align: center;
   margin-top: 60px;
 `;
+
+const StyledLoader = styled(Loader)``;
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -70,6 +73,14 @@ class Component extends React.Component {
     const { data } = this.state;
     const score = this.getAvgScore(data);
     const feedbacksNumber = data.length;
+
+    if (data.length == 0) {
+      return (
+        <Header>
+          <StyledLoader type="Puff" color="#00BFFF" height="100" width="100" />
+        </Header>
+      );
+    }
 
     return (
       <div>
