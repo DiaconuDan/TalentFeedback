@@ -6,18 +6,11 @@ import CustomizedTable from "./CustomizedTable";
 import styled from "styled-components";
 
 const Wrapper = styled.div``;
-const Header = styled.h1`
-  text-align: center;
-`;
-class Component extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
+class Component extends React.Component {
   render() {
     return (
       <Wrapper>
-        {/* <Header>Statistics..</Header> */}
         <CustomizedTable />
       </Wrapper>
     );

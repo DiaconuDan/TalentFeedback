@@ -74,7 +74,7 @@ class Component extends React.Component {
     const score = this.getAvgScore(data);
     const feedbacksNumber = data.length;
 
-    if (data.length == 0) {
+    if (data.length === 0) {
       return (
         <Header>
           <StyledLoader type="Puff" color="#00BFFF" height="100" width="100" />
@@ -103,9 +103,7 @@ class Component extends React.Component {
                     <CustomTableCell component="th" scope="row">
                       {row.score}
                     </CustomTableCell>
-                    <CustomTableCell align="left">
-                      {row.date.toDate().toDateString()}
-                    </CustomTableCell>
+                    <CustomTableCell align="left">{row.date}</CustomTableCell>
                     <CustomTableCell align="right">
                       {row.comment}
                     </CustomTableCell>

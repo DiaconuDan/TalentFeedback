@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "react-loader-spinner";
 import { withFirebase } from "../Firebase";
 import styled from "styled-components";
 import angry from "./angry.svg";
@@ -7,13 +6,15 @@ import sad from "./sad.svg";
 import neutral from "./neutral.svg";
 import happy from "./happy.svg";
 import amazing from "./amazing.svg";
-
+import moment from "moment";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 const Emoticon = styled.img`
   padding-right: 20px;
-
-  :hover {
-    background-color: #ffe4b5;
-  }
+  cursor: pointer;
 `;
 const FeedbackComment = styled.textarea`
   width: 100%;
@@ -52,27 +53,36 @@ const Button = styled.button`
   margin-top: 40px;
 `;
 const INITIAL_STATE = {
-  score: "",
+  score: 100,
   comment: ""
 };
 class Component extends React.Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
-    const query = this.props.firebase.feedbacks();
   }
 
   onSubmit = event => {
     const { comment, score } = this.state;
-
-    alert("Not implemented yet");
-
+    const date = moment()
+      .format("L")
+      .toString();
+    this.props.firebase.feedbacks().add({
+      comment,
+      score,
+      date
+    });
+    NotificationManager.success("Thank you!", "Feedback was added!");
+    this.setState({ ...INITIAL_STATE });
     event.preventDefault();
+    event.target.reset();
   };
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  onTodoChange(name, value) {
+    this.setState({
+      [name]: value
+    });
+  }
 
   render() {
     const { comment, score } = this.state;
@@ -80,25 +90,45 @@ class Component extends React.Component {
     return (
       <div>
         <Box>
+          <NotificationContainer />
           <form onSubmit={this.onSubmit}>
             <InterviewQuestion>
-              {" "}
               How happy are you with the interview ?
             </InterviewQuestion>
-            <Emoticon src={angry} />
-            <Emoticon src={sad} />
-            <Emoticon src={neutral} />
-            <Emoticon src={happy} />
-            <Emoticon src={amazing} />
+            <Emoticon
+              src={angry}
+              onClick={e => this.onTodoChange("score", 0)}
+              style={{ backgroundColor: score === 0 && " #ffe4b5" }}
+            />
+            <Emoticon
+              src={sad}
+              onClick={e => this.onTodoChange("score", 25)}
+              style={{ backgroundColor: score === 25 && " #ffe4b5" }}
+            />
+            <Emoticon
+              src={neutral}
+              onClick={e => this.onTodoChange("score", 50)}
+              style={{ backgroundColor: score === 50 && " #ffe4b5" }}
+            />
+            <Emoticon
+              src={happy}
+              onClick={e => this.onTodoChange("score", 75)}
+              style={{ backgroundColor: score === 75 && " #ffe4b5" }}
+            />
+            <Emoticon
+              src={amazing}
+              onClick={e => this.onTodoChange("score", 100)}
+              style={{ backgroundColor: score === 100 && " #ffe4b5" }}
+            />
 
             <InterviewQuestion>
-              {" "}
               Would you like to tell us something ?
             </InterviewQuestion>
             <FeedbackComment
               type="text"
               value={comment}
-              onChange={this.onChange}
+              onChange={e => this.onTodoChange("comment", e.target.value)}
+              required
             />
 
             <Button type="submit">Submit</Button>
